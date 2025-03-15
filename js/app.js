@@ -25,6 +25,9 @@ function sortear(){
     
     if(checarNomesIguais(amigosIncluidos,amigoSecreto)==true){
         return sortear();
+    } else if (amigosIncluidos.length<4){
+        alert("Para que o jogo do amigo secreto funcione de verdade é necessário um mínimo de 4 participantes!")
+        return;
     } else {
         let listaDosAmigosSecretos = "";
         for(let i=0;i!=amigosIncluidos.length;i++){
