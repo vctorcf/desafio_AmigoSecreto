@@ -5,11 +5,18 @@ function adicionar(){
     let novoAmigo = document.getElementById("nome-amigo").value;
     console.log(novoAmigo);
 
+    if(novoAmigo==''){
+        alert("Por favor, insira um nome.");
+        return;
+    } else if(amigosIncluidos.includes(novoAmigo)){
+        alert(`O nome "${novoAmigo}" já existe na lista! Se 2 ou mais participantes possuirem o mesmo nome, por favor insira também um segundo nome para diferencia-los.`);
+    } else{
     amigosIncluidos.push(novoAmigo);
     amigoSecreto.push(novoAmigo);
     console.log(amigosIncluidos)
 
     document.getElementById("lista-amigos").innerHTML = amigosIncluidos;
+    }
 }
 
 function sortear(){
