@@ -1,9 +1,12 @@
 const amigosIncluidos =[];
 const amigoSecreto =[];
 
+let teste = document.getElementById("lista-amigos");
+teste.remove();
+let espacoBotaoRemover = document.querySelector(".friends__container");
+
 function adicionar(){
     let novoAmigo = document.getElementById("nome-amigo").value;
-    console.log(novoAmigo);
 
     if(novoAmigo==''){
         alert("Por favor, insira um nome.");
@@ -13,9 +16,9 @@ function adicionar(){
     } else{
     amigosIncluidos.push(novoAmigo);
     amigoSecreto.push(novoAmigo);
-    console.log(amigosIncluidos)
 
-    document.getElementById("lista-amigos").innerHTML = amigosIncluidos;
+    espacoBotaoRemover.innerHTML +=`<button id="${novoAmigo}__button" onclick="remover('${novoAmigo}')" type="button" class="button secondary">${novoAmigo}</button>`;
+    console.log(amigosIncluidos);
     }
 }
 
@@ -39,17 +42,22 @@ function sortear(){
 }
 
 function reiniciar(){
-for(let i=0;amigosIncluidos.length!=0;i++){
-    amigosIncluidos.pop();
-}
+    for(let i=0;amigosIncluidos.length!=0;i++){
+        amigosIncluidos.pop();
+    }
+    console.log("Reiniciar amigosIncluidos OK");
 
-for(let i=0;amigoSecreto.length!=0;i++){
-    amigoSecreto.pop();
-}
+    for(let i=0;amigoSecreto.length!=0;i++){
+        amigoSecreto.pop();
+    }
+    console.log("Reiniciar amigoSecreto OK");
 
+    document.getElementById("lista-sorteio").textContent = "";
+    console.log("Reiniciar a lista de sorteio OK");
+    
 
-document.getElementById("lista-amigos").textContent="";
-document.getElementById("lista-sorteio").textContent = "";
+    espacoBotaoRemover.innerHTML='';
+    console.log("Reiniciar botões de remover OK");
 }
 
 function metodoFisherYates(array){
@@ -68,4 +76,16 @@ function checarNomesIguais(array1,array2){
             return true;
         }
     }
+}
+
+function remover(participante){
+    let indexAmigosIncluidos = amigosIncluidos.findIndex(amigo => amigo === participante);
+    let indexAmigoSecreto = amigoSecreto.findIndex(amigo => amigo === participante);
+    console.log("Index encontrado!");
+
+    amigosIncluidos.splice(indexAmigosIncluidos,1);
+    amigoSecreto.splice(indexAmigoSecreto,1);
+    console.log("Nomes removidos da 2 listas!");
+
+    document.getElementById(`${participante}__button`).remove();
 }
